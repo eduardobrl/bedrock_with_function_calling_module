@@ -17,10 +17,9 @@ resource "aws_bedrockagent_agent_action_group" "scheduler_assistant" {
     payload = file(each.value.schema)
   }
   
+  depends_on = [aws_lambda_function.lambda]
   
 }
-
-
 
 resource "aws_lambda_function" "lambda" {
   for_each = {
@@ -64,4 +63,5 @@ resource "aws_iam_role_policy_attachment" "bedrock_query_lambda_basic_execution"
   }
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   role       =  "${each.value.name}-role"
+  depends_on = [aws_iam_role.lambda_role]
 }

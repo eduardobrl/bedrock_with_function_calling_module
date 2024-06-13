@@ -52,3 +52,8 @@ resource "aws_bedrockagent_agent" "scheduler_assistant" {
   description                 = "Bedrock agent for service ${var.app_name}"
 }
 
+resource "aws_bedrockagent_agent_alias" "scheduler_assistant" {
+  agent_alias_name = var.alias_name
+  agent_id         = aws_bedrockagent_agent.scheduler_assistant.agent_id
+  description      = "Prodution deployment Alias"
+}

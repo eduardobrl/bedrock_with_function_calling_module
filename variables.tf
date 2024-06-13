@@ -15,6 +15,12 @@ variable "app_name" {
   type        = string
 }
 
+variable "alias_name" {
+  description = "The name of ther service"
+  type        = string
+  default = "prod"
+}
+
 variable "functions" {
   description = "Lambda functions to handle bedrock tools"
   type        = set(object({
